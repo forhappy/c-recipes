@@ -21,7 +21,7 @@ struct cat_s_ {
 
     /* 以下还可以添加与 cat 相关的属性和方法(函数指针), 如: */
     /* char *owner; // cat 的主人 */
-    /* void (*hunt)(const char *rabbit); // 猎兔犬 */
+    /* void (*hunt)(const char *mouse); // 捕老鼠 */
 };
 
 extern cat_t * cat_init();
