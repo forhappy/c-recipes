@@ -36,7 +36,7 @@ void Singleton::Register(const std::string& name,
 }
 
 Singleton* Singleton::getInstance() {
-    std::string name(getenv("XXX"));
+    std::string name(getenv("XXX") ? getenv("XXX") : "");
     if (name.empty()) name = "default";
 
     if (singleton_ == nullptr) {
