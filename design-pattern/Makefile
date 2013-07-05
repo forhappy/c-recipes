@@ -1,8 +1,14 @@
-all:AbstractFactory Decorator Singleton Singleton-Registry
+all:AbstractFactory Decorator Singleton Singleton-Registry Strategy
 
 CC=g++
 CPPFLAGS=-Wall -g -std=c++0x
 LDFLAGS=
+
+Strategy:Strategy.o
+	$(CC) $(LDFLAGS) -o $@ $^
+
+Strategy.o:Strategy.cc
+	$(CC) $(CPPFLAGS) -o $@ -c $^
 
 Singleton-Registry:Singleton-Registry.o
 	$(CC) $(LDFLAGS) -o $@ $^
@@ -34,4 +40,5 @@ clean:
 	rm AbstractFactory.o AbstractFactory\
 		Decorator.o Decorator\
 		Singleton.o Singleton\
+		Strategy.o Strategy\
 		Singleton-Registry.o Singleton-Registry
