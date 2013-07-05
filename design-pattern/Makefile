@@ -1,16 +1,21 @@
 all:AbstractFactory Decorator Singleton Singleton-Registry Strategy\
-	Template Builder
+	Template Builder FactoryMethod
 
 CC=g++
 CPPFLAGS=-Wall -g -std=c++0x
 LDFLAGS=
+
+FactoryMethod:FactoryMethod.o
+	$(CC) $(LDFLAGS) -o $@ $^
+
+FactoryMethod.o:FactoryMethod.cc
+	$(CC) $(CPPFLAGS) -o $@ -c $^
 
 Builder:Builder.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
 Builder.o:Builder.cc
 	$(CC) $(CPPFLAGS) -o $@ -c $^
-
 
 Template:Template.o
 	$(CC) $(LDFLAGS) -o $@ $^
@@ -57,4 +62,5 @@ clean:
 		Strategy.o Strategy\
 		Singleton-Registry.o Singleton-Registry\
 		Template.o Template\
-		Builder.o Builder
+		Builder.o Builder\
+		FactoryMethod.o FactoryMethod
