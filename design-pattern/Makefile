@@ -1,10 +1,16 @@
 all:AbstractFactory Decorator Singleton Singleton-Registry Strategy\
 	Template Builder FactoryMethod Prototype Adapter-Class Adapter-Object\
-	Bridge
+	Bridge Proxy
 
 CC=g++
 CPPFLAGS=-Wall -g -std=c++0x
 LDFLAGS=
+
+Proxy:Proxy.o
+	$(CC) $(LDFLAGS) -o $@ $^
+
+Proxy.o:Proxy.cc
+	$(CC) $(CPPFLAGS) -o $@ -c $^
 
 Bridge:Bridge.o
 	$(CC) $(LDFLAGS) -o $@ $^
@@ -92,4 +98,5 @@ clean:
 		Prototype.o Prototype\
 		Adapter-Class.o Adapter-Class\
 		Adapter-Object.o Adapter-Object\
-		Bridge.o Bridge
+		Bridge.o Bridge\
+		Proxy.o Proxy
