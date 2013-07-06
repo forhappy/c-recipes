@@ -1,9 +1,21 @@
 all:AbstractFactory Decorator Singleton Singleton-Registry Strategy\
-	Template Builder FactoryMethod Prototype
+	Template Builder FactoryMethod Prototype Adapter-Class Adapter-Object
 
 CC=g++
 CPPFLAGS=-Wall -g -std=c++0x
 LDFLAGS=
+
+Adapter-Object:Adapter-Object.o
+	$(CC) $(LDFLAGS) -o $@ $^
+
+Adapter-Object.o:Adapter-Object.cc
+	$(CC) $(CPPFLAGS) -o $@ -c $^
+
+Adapter-Class:Adapter-Class.o
+	$(CC) $(LDFLAGS) -o $@ $^
+
+Adapter-Class.o:Adapter-Class.cc
+	$(CC) $(CPPFLAGS) -o $@ -c $^
 
 Prototype:Prototype.o
 	$(CC) $(LDFLAGS) -o $@ $^
@@ -70,4 +82,6 @@ clean:
 		Template.o Template\
 		Builder.o Builder\
 		FactoryMethod.o FactoryMethod\
-		Prototype.o Prototype
+		Prototype.o Prototype\
+		Adapter-Class.o Adapter-Class\
+		Adapter-Object.o Adapter-Object
