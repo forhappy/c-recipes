@@ -17,7 +17,7 @@ size_t MinCuts(size_t L, const size_t cut_pos[], size_t cut_pos_len) {
         cut_cost[i * cut_pos_len + i] = 0;
     }
 
-    for (size_t i = 0; i < cut_pos_len-1;  i++) {
+    for (size_t i = 0; i < cut_pos_len - 1;  i++) {
         cut_cost[i * cut_pos_len + i + 1] = 0;
     }
 
