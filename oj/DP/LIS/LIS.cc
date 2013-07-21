@@ -66,7 +66,7 @@ int LIS(int A[], int size) {
         else
             // A[i] wants to be current end candidate of an existing subsequence
             // it will replace ceil value in tailTable
-            tailTable[CeilIndex(tailTable, -1, len-1, A[i])] = A[i];
+            tailTable[aux_bsearch(tailTable, -1, len-1, A[i])] = A[i];
     }
 
     std::for_each(tailTable, tailTable + size, [](int i) {
