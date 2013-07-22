@@ -8,8 +8,6 @@
 #include <iostream>
 #include <vector>
 
-#include <boost/scoped_array.hpp>
-
 #define min3(x, y, z) ({			\
 	typeof(x) _min1 = (x);			\
 	typeof(y) _min2 = (y);			\
@@ -46,7 +44,6 @@ int EditDistance(const std::string& source, const std::string& target) {
     }
 
     return aux_table[source.length() - 1][target.length() - 1];
-
 }
 
 
