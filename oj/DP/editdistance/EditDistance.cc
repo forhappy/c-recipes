@@ -31,8 +31,8 @@ int EditDistance(const std::string& source, const std::string& target) {
     std::vector<std::vector<int> > aux_table(source.length() + 1,
             std::vector<int>(target.length() + 1, 0));
 
-    for (size_t i = 0; i < source.length(); i++) aux_table[i][0] = i;
-    for (size_t i = 0; i < target.length(); i++) aux_table[0][i] = i;
+    for (size_t i = 1; i <= source.length(); i++) aux_table[i][0] = i;
+    for (size_t i = 1; i <= target.length(); i++) aux_table[0][i] = i;
 
     for (size_t i = 1; i <= source.length(); i++) {
         for (size_t j = 1; j <= target.length(); j++) {
