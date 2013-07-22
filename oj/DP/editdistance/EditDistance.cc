@@ -28,14 +28,14 @@ int EditDistance(const std::string& source, const std::string& target) {
     if (source.length() == 0) return target.length();
     if (target.length() == 0) return source.length();
 
-    std::vector<std::vector<int> > aux_table(source.length(),
-            std::vector<int>(target.length(), 0));
+    std::vector<std::vector<int> > aux_table(source.length() + 1,
+            std::vector<int>(target.length() + 1, 0));
 
     for (size_t i = 0; i < source.length(); i++) aux_table[i][0] = i;
     for (size_t i = 0; i < target.length(); i++) aux_table[0][i] = i;
 
-    for (size_t i = 1; i < source.length(); i++) {
-        for (size_t j = 1; j < target.length(); j++) {
+    for (size_t i = 1; i <= source.length(); i++) {
+        for (size_t j = 1; j <= target.length(); j++) {
             if (source[i] == target[j]) aux_table[i][j] = aux_table[i - 1][j - 1];
             else {
                 aux_table[i][j] = min3(aux_table[i - 1][j] + kDeletionCost,
