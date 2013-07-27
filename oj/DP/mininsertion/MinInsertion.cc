@@ -21,11 +21,14 @@ int FindMinInsertions(const std::string& src) {
         }
     }
 
-    for (int j = 0; j < aux_table.size(); j++) {
-        for (int k = 2; k < aux_table.size() - j; k++) {
-            if (src[j] == src[k]) aux_table[j][k] = aux_table[j + 1][k - 1];
+    for (int gap = 2; gap < aux_table.size(); gap++) {
+        for (int k = 0; k + gap < aux_table.size(); k++) {
+            if (src[k] == src[k + gap]) aux_table[k][k + gap] =
+                aux_table[k + 1][k + gap - 1];
             else {
-                aux_table[j][k] = std::min(aux_table[j + 1][k] + 1, aux_table[j][k - 1] + 1);
+                aux_table[k][k + gap] =
+                    std::min(aux_table[k + 1][k + gap] + 1,
+                            aux_table[k][k  + gap - 1] + 1);
             }
         }
     }
@@ -42,7 +45,7 @@ int FindMinInsertions(const std::string& src) {
  */
 int main(int argc, const char *argv[])
 {
-    std::string src = "aabc";
+    std::string src = "aabcba";
 
     std::cout << FindMinInsertions(src) << std::endl;
 
