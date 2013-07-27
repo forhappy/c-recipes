@@ -1,0 +1,50 @@
+// Given a string, find the minimum number of characters to be inserted to convert it to palindrome.
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <cstring>
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+int FindMinInsertions(const std::string& src) {
+
+    std::vector<std::vector<int> > aux_table(src.length(),
+            std::vector<int>(src.length(), 0));
+
+    for (int i = 0; i < aux_table.size(); i++) {
+        aux_table[i][i] = 0;
+        if (i + 1 < aux_table.size()){
+            if (src[i] == src[i + 1])
+                aux_table[i][i + 1] = 0;
+            else aux_table[i][i + 1] = 1;
+        }
+    }
+
+    for (int j = 0; j < aux_table.size(); j++) {
+        for (int k = 2; k < aux_table.size() - j; k++) {
+            if (src[j] == src[k]) aux_table[j][k] = aux_table[j + 1][k - 1];
+            else {
+                aux_table[j][k] = std::min(aux_table[j + 1][k] + 1, aux_table[j][k - 1] + 1);
+            }
+        }
+    }
+
+    return aux_table[0][aux_table.size() - 1];
+}
+
+
+/*
+ * ===  FUNCTION  =========================================================
+ *         Name:  main
+ *  Description:  program entry routine.
+ * ========================================================================
+ */
+int main(int argc, const char *argv[])
+{
+    std::string src = "aabc";
+
+    std::cout << FindMinInsertions(src) << std::endl;
+
+    return EXIT_SUCCESS;
+}  /* ----------  end of function main  ---------- */
