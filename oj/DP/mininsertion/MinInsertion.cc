@@ -1,4 +1,5 @@
-// Given a string, find the minimum number of characters to be inserted to convert it to palindrome.
+// Given a string, find the minimum number of characters
+// to be inserted to convert it to palindrome.
 #include <stdio.h>
 #include <stdlib.h>
 
