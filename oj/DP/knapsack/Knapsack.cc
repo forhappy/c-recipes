@@ -21,34 +21,34 @@ int Knapsack(int capacity,
         const std::vector<int>& weights) {
     assert((items == values.size()) && (items == weights.size()));
 
-    std::vector<std::vector<int> > aux_table(capacity + 1,
-            std::vector<int>(items));
+    std::vector<std::vector<int> > aux_table(items,
+            std::vector<int>(capacity + 1));
 
     {
         for (int i = 0; i <= capacity; i++) {
             if (i < weights[0]) {
-                aux_table[i][0] = 0;
+                aux_table[0][i] = 0;
             }
-            else aux_table[i][0] = values[0];
+            else aux_table[0][i] = values[0];
         }
     }
 
     for (int i = 0; i < items; i++) {
-        aux_table[0][i] = 0;
+        aux_table[i][0] = 0;
     }
 
-    for (int c = 1; c <= capacity; c++) {
-        for (int i = 1; i < items; i++) {
+    for (int i = 1; i < items; i++) {
+        for (int c = 1; c <= capacity; c++) {
             if (c < weights[i]) {
-                aux_table[c][i] = aux_table[c][i - 1];
+                aux_table[i][c] = aux_table[i - 1][c];
             } else {
-                aux_table[c][i] = std::max(aux_table[c][i - 1],
-                        aux_table[c - weights[i]][i] + values[i]);
+                aux_table[i][c] = std::max(aux_table[i - 1][c],
+                        aux_table[i - 1][c - weights[i]] + values[i]);
             }
         }
     }
 
-    return aux_table[capacity][items - 1];
+    return aux_table[items - 1][capacity];
 }
 
 /*
@@ -59,9 +59,9 @@ int Knapsack(int capacity,
  */
 int main(int argc, const char *argv[])
 {
-    int capacity = 10;
-    std::vector<int> weights = {2, 2, 6, 5, 4};
-    std::vector<int> values = {6, 3, 5, 4, 6};
+    int capacity = 11;
+    std::vector<int> weights = {2, 6, 4, 7, 9};
+    std::vector<int> values = {1, 6, 5, 9, 4};
 
     std::cout << Knapsack(capacity, values.size(), values, weights) << std::endl;
     return EXIT_SUCCESS;
