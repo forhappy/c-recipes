@@ -21,7 +21,7 @@ std::vector<int> ReserviorSampling(
             stream.begin() + sampling_counts);
 
     for (int i = sampling_counts; i < stream.size(); i++) {
-        int index = rand() % i;
+        int index = rand() % (i + 1);
         if (index < sampling_counts)
             reservior[index] = stream[i];
     }
