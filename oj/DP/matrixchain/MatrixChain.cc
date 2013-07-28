@@ -2,46 +2,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <iostream>
 #include <algorithm>
+#include <climits>
+#include <iostream>
+#include <vector>
 
-#include <boost/scoped_array.hpp>
+int MatrixChain(const std::vector<int>& p) {
+    if (p.empty() == true) return 0;
 
-int LCS(const int* target, size_t tlen,
-        const int* source, size_t slen ) {
-    size_t lcs = 0;
-    boost::scoped_array<int> lcs_ptr(new int[slen * tlen]);
-    bool first_matched_flags = false;
+    int aux_table_size = p.size() - 1;
+    std::vector<std::vector<int> > aux_table(aux_table_size,
+            std::vector<int>(aux_table_size));
 
-    for (size_t i = 0; i < tlen; i++) {
-        if (source[0] == target[i] || first_matched_flags == true) {
-            lcs_ptr[i] = 1;
-            first_matched_flags = true;
+    for (int i = 0; i < aux_table_size; i++) {
+        aux_table[i][i] = 0;
+        if (i + 1 < aux_table_size) {
+            aux_table[i][i + 1] = p[i] * p[i + 1] * p[i + 2];
         }
     }
 
-    first_matched_flags = false;
-    for (size_t i = 0; i < slen; i++) {
-        if (target[0] == source[i] || first_matched_flags == true) {
-            lcs_ptr[i * tlen] = 1;
-        }
-    }
-
-    for (size_t s = 1; s < tlen; s++) {
-        for (size_t t = 1; t < slen; t++) {
-            if (target[t] == source[s])
-                lcs_ptr[(s * tlen) + t] = lcs_ptr[(s - 1) * tlen + (t - 1)] + 1;
-            else {
-                lcs_ptr[(s * tlen) + t] =
-                    std::max(lcs_ptr[(s - 1) * tlen + t], lcs_ptr[s * tlen + t - 1]);
+    for (int gap = 2; gap < aux_table_size; gap++) {
+        for (int i = 0; i < aux_table_size - gap; i++) {
+            int current_min_multiplies = INT_MAX;
+            for (int j = 0; j < gap; j++) {
+                int t = aux_table[i][i + j]
+                    + aux_table[i + j + 1][i + gap]
+                    + p[i] * p[i + j + 1] * p[i + gap + 1];
+                if (t < current_min_multiplies) current_min_multiplies = t;
             }
+            aux_table[i][i + gap] = current_min_multiplies;
         }
     }
-    lcs = lcs_ptr[(slen - 1) * tlen + slen - 1];
 
-    return lcs;
-
+    return aux_table[0][aux_table_size - 1];
 }
+
 
 /*
  * ===  FUNCTION  =========================================================
@@ -51,25 +46,7 @@ int LCS(const int* target, size_t tlen,
  */
 int main(int argc, const char *argv[])
 {
-    int target[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-
-    int source1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    int source2[] = {4, 7, 2, 3, 10, 6, 9, 1, 5, 8};
-    int source3[] = {3, 1, 2, 4, 9, 5, 10, 6, 8, 7};
-    int source4[] = {2, 10, 1, 3, 8, 4, 9, 5, 7, 6};
-    int source5[] = {2};
-    int source6[] = {2, 3};
-    int source7[] = {2, 3, 4};
-    int source8[] = {2, 3, 5, 4};
-
-    std::cout << LCS(target, 10, source1, 10) << std::endl;
-    std::cout << LCS(target, 10, source2, 10) << std::endl;
-    std::cout << LCS(target, 10, source3, 10) << std::endl;
-    std::cout << LCS(target, 10, source4, 10) << std::endl;
-    std::cout << LCS(target, 10, source5, 10) << std::endl;
-    std::cout << LCS(target, 10, source6, 10) << std::endl;
-    std::cout << LCS(target, 10, source7, 10) << std::endl;
-    std::cout << LCS(target, 10, source8, 10) << std::endl;
-
+    std::vector<int> p = {30, 35, 15, 5, 10, 20, 25};
+    std::cout << MatrixChain(p) << std::endl;
     return EXIT_SUCCESS;
 }  /* ----------  end of function main  ---------- */
