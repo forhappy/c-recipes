@@ -37,9 +37,11 @@ std::vector<int> ReserviorSampling(
  */
 int main(int argc, const char *argv[])
 {
-    std::vector<int> stream = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+    std::vector<int> stream;
+    for (int i = 0; i < 1000000; i++)
+        stream.push_back(i);
 
-    const std::vector<int> sampling = ReserviorSampling(stream, 2);
+    const std::vector<int> sampling = ReserviorSampling(stream, 20000);
 
     for_each(sampling.begin(), sampling.end(),
             [](int i) {std::cout << i << "\t" << std::endl;});
