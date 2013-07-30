@@ -31,7 +31,7 @@ int LongestPalindromicSubstring(const std::string& src) {
         for (int i = 0; i < src_len - gap; i++) {
             if (aux[i + 1][i + gap - 1] == 1 && src[i] == src[i + gap]) {
                 aux[i][i + gap] = 1;
-                if (max_palindorme_len < gap) {
+                if (max_palindorme_len <= gap) {
                     start = i;
                     max_palindorme_len = gap + 1;
                 }
@@ -53,7 +53,9 @@ int main(int argc, const char *argv[])
 {
     std::string src1 = "helloll";
     std::string src2 = "hhhhhhhhhlsdkjffjkdslhhh";
+    std::string src3 = "ccc";
     std::cout << LongestPalindromicSubstring(src1) << std::endl;
     std::cout << LongestPalindromicSubstring(src2) << std::endl;
+    std::cout << LongestPalindromicSubstring(src3) << std::endl;
     return EXIT_SUCCESS;
 }  /* ----------  end of function main  ---------- */
