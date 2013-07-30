@@ -70,7 +70,7 @@ int main(int argc, const char *argv[])
     std::cout << PalindromeCuts("abcbaf") << std::endl;
     std::cout << PalindromeCuts("abcbag") << std::endl;
     std::cout << PalindromeCuts("abcbaa") << std::endl;
-    std::cout << PalindromeCuts("abcassss") << std::endl;
+    std::cout << PalindromeCuts("adabdcaebdcebdcacaaaadbbcadabcbeabaadcbcaaddebdbddcbdacdbbaedbdaaecabdceddccbdeeddccdaabbabbdedaaabcdadbdabeacbeadbaddcbaacdbabcccbaceedbcccedbeecbccaecadccbdbdccbcbaacccbddcccbaedbacdbcaccdcaadcbaebebcceabbdcdeaabdbabadeaaaaedbdbcebcbddebccacacddebecabccbbdcbecbaeedcdacdcbdbebbacddddaabaedabbaaabaddcdaadcccdeebcabacdadbaacdccbeceddeebbbdbaaaaabaeecccaebdeabddacbedededebdebabdbcbdcbadbeeceecdcdbbdcbdbeeebcdcabdeeacabdeaedebbcaacdadaecbccbededceceabdcabdeabbcdecdedadcaebaababeedcaacdbdacbccdbcece") << std::endl;
 
     return EXIT_SUCCESS;
 }  /* ----------  end of function main  ---------- */
