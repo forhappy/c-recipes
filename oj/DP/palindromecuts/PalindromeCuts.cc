@@ -37,7 +37,10 @@ int PalindromeCuts(const std::string& src) {
 
     for (int gap = 2; gap < src_len; gap++) {
         for (int i = 0; i < src_len - gap; i++) {
-            if (IsPalindrome(src.substr(i, gap))) {
+//            std::cout << "i: " << i << "\t" << "gap: " << gap << "\t"
+//                << src.substr(i, gap + 1) << std::endl;
+            if (IsPalindrome(src.substr(i, gap + 1))) {
+                // substr(i, gap + 1) is important here.
                 aux_table[i][i + gap] = 0;
             } else {
                 int current_min_cuts = INT_MAX;
@@ -63,8 +66,11 @@ int PalindromeCuts(const std::string& src) {
  */
 int main(int argc, const char *argv[])
 {
-    std::cout << PalindromeCuts("abc") << std::endl;
-    std::cout << PalindromeCuts("abccba") << std::endl;
+    std::cout << PalindromeCuts("abcbac") << std::endl;
+    std::cout << PalindromeCuts("abcbaf") << std::endl;
+    std::cout << PalindromeCuts("abcbag") << std::endl;
+    std::cout << PalindromeCuts("abcbaa") << std::endl;
+    std::cout << PalindromeCuts("abcassss") << std::endl;
 
     return EXIT_SUCCESS;
 }  /* ----------  end of function main  ---------- */
