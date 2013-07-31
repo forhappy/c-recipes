@@ -16,7 +16,7 @@ int LongestZigZagSubsequence(const std::vector<int>& arr) {
     std::vector<int>::size_type arr_size = arr.size();
     // record the current max zigzag subsuequence length at i^th element.
     std::vector<int> aux(arr_size);
-    // recodd the direction of current element and previous element,
+    // record the direction of current element and previous element,
     // 1 means the current element is greater than the previous element
     // in this zigzag subsuequence. 0 means the current element is less
     // than the previous element in this zigzag subsuequence.
