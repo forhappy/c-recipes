@@ -26,7 +26,14 @@
 
 #include <algorithm>
 #include <iostream>
+#include <map>
 #include <vector>
+
+std::vector<std::pair<int, int> > StableMarriage(
+        const std::vector<std::vector<int> > man_prefer_table,
+        const std::vector<std::vector<int> > women_prefer_table) {
+
+}
 
 /*
  * ===  FUNCTION  =========================================================
