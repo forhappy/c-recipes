@@ -4,6 +4,18 @@
 
 #include <iostream>
 
+int NextPowerOf2(int v) {
+    int c = 0;
+    v--;
+    v |= v >> 1;
+    v |= v >> 2;
+    v |= v >> 4;
+    v |= v >> 8;
+    v |= v >> 16;
+    c = ++v;
+    return c;
+}
+
 /*
  * ===  FUNCTION  =========================================================
  *         Name:  main
@@ -25,5 +37,7 @@ int main(int argc, const char *argv[])
     }
 
     std::cout << c << std::endl;
+
+    std::cout << NextPowerOf2(1000) << std::endl;
     return EXIT_SUCCESS;
 }  /* ----------  end of function main  ---------- */
