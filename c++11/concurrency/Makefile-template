@@ -1,0 +1,25 @@
+all:Thread-Startup Thread-MoveAssignment
+
+CC=g++
+CPPFLAGS=-Wall -std=c++11 -ggdb
+LDFLAGS=-pthread
+
+Thread-Startup:Thread-Startup.o
+	$(CC) $(LDFLAGS) -o $@ $^
+
+Thread-Startup.o:Thread-Startup.cc
+	$(CC) $(CPPFLAGS) -o $@ -c $^
+
+Thread-MoveAssignment:Thread-MoveAssignment.o
+	$(CC) $(LDFLAGS) -o $@ $^
+
+Thread-MoveAssignment.o:Thread-MoveAssignment.cc
+	$(CC) $(CPPFLAGS) -o $@ -c $^
+
+
+.PHONY:
+	clean
+
+clean:
+	rm Thread-Startup.o Thread-Startup\
+		Thread-MoveAssignment.o Thread-MoveAssignment 
