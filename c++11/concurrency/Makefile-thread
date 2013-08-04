@@ -1,4 +1,4 @@
-all:Thread-Startup Thread-MoveAssignment
+all:Thread-Startup Thread-MoveAssignment Thread-Async
 
 CC=g++
 CPPFLAGS=-Wall -std=c++11 -ggdb
@@ -16,10 +16,17 @@ Thread-MoveAssignment:Thread-MoveAssignment.o
 Thread-MoveAssignment.o:Thread-MoveAssignment.cc
 	$(CC) $(CPPFLAGS) -o $@ -c $^
 
+Thread-Async:Thread-Async.o
+	$(CC) $(LDFLAGS) -o $@ $^
+
+Thread-Async.o:Thread-Async.cc
+	$(CC) $(CPPFLAGS) -o $@ -c $^
+
 
 .PHONY:
 	clean
 
 clean:
 	rm Thread-Startup.o Thread-Startup\
-		Thread-MoveAssignment.o Thread-MoveAssignment 
+		Thread-MoveAssignment.o Thread-MoveAssignment\
+		Thread-Async.o Thread-Async
