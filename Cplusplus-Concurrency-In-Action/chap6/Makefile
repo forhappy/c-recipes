@@ -1,17 +1,17 @@
-all: TestThreadSafeStack
+all: stack_test
 
 CC=g++
 CPPFLAGS=-Wall -std=c++11 -ggdb -I../third-party/googletest/include
 LDFLAGS=-pthread -L../third-party/googletest/build -lgtest_main -lgtest
 
-TestThreadSafeStack:TestThreadSafeStack.o
+stack_test:stack_test.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
-TestThreadSafeStack.o:TestThreadSafeStack.cc
+stack_test.o:stack_test.cc
 	$(CC) $(CPPFLAGS) -o $@ -c $^
 
 .PHONY:
 	clean
 
 clean:
-	rm TestThreadSafeStack.o TestThreadSafeStack\
+	rm stack_test.o stack_test\

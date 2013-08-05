@@ -1,7 +1,7 @@
 /*
  * ========================================================================
  *
- *       Filename:  TestThreadSafeStack.cc
+ *       Filename:  stack_test.cc
  *
  *    Description:  Test thread-safe stack.
  *
@@ -19,11 +19,11 @@
 #include <iostream>
 #include <memory>
 
-#include "ThreadSafeStack.h"
+#include "stack.h"
 #include "gtest/gtest.h"
 
-TEST(ThreadSafeStack, SingleThreadNormal) {
-    ccia::ThreadSafeStack<int> stack;
+TEST(Stack, SingleThreadNormal) {
+    ccia::Stack<int> stack;
     int value;
     stack.push(1);
     stack.push(2);

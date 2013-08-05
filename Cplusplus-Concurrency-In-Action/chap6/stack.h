@@ -30,19 +30,19 @@ struct empty_stack: std::exception {
 };
 
 template<typename T>
-class ThreadSafeStack {
+class Stack {
 private:
     std::stack<T> data;
     mutable std::mutex m;
 public:
-    ThreadSafeStack() {}
+    Stack() {}
 
-    ThreadSafeStack(const ThreadSafeStack& other) {
+    Stack(const Stack& other) {
         std::lock_guard<std::mutex> lock(other.m);
         data = other.data;
     }
 
-    ThreadSafeStack& operator=(const ThreadSafeStack& other) = delete;
+    Stack& operator=(const Stack& other) = delete;
 
     void push(T new_value) {
         std::lock_guard<std::mutex> lock(m);
