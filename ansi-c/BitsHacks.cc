@@ -4,6 +4,33 @@
 
 #include <iostream>
 
+int SetBit(int x, unsigned char pos) {
+    int mask = (1 << pos);
+    return x | mask;
+}
+
+int ClearBit(int x, unsigned char pos) {
+    int mask = (1 << pos);
+    return x & ~mask;
+}
+
+int ModifyBit(int x, unsigned char pos, bool new_value) {
+    int mask = (1 << pos);
+    int state = int(new_value);
+    return (x & ~mask) | (-state & mask);
+}
+
+int FlipBit(int x, unsigned char pos) {
+    int mask = 1 << pos;
+    return x ^ mask;
+}
+
+bool IsBitSet(int x, unsigned char pos) {
+    x >>= pos;
+    return (x & 1) != 0;
+}
+
+
 int NextPowerOf2(int v) {
     int c = 0;
     v--;
