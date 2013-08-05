@@ -17,26 +17,15 @@
 #include <stdlib.h>
 
 #include <iostream>
+#include <memory>
 
 #include "ThreadSafeStack.h"
+#include "gtest/gtest.h"
 
-
-
-/*
- * ===  FUNCTION  =========================================================
- *         Name:  main
- *  Description:  program entry routine.
- * ========================================================================
- */
-int main(int argc, const char *argv[])
-{
+TEST(ThreadSafeStack, SingleThread) {
     ccia::ThreadSafeStack<int> stack;
+    stack.push(1);
     stack.push(2);
     stack.push(3);
-
-    stack.pop();
-    stack.pop();
-    stack.pop();
-
-    return EXIT_SUCCESS;
-}  /* ----------  end of function main  ---------- */
+    stack.push(4);
+}

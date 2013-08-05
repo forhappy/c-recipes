@@ -1,8 +1,8 @@
 all: TestThreadSafeStack
 
 CC=g++
-CPPFLAGS=-Wall -std=c++11 -ggdb
-LDFLAGS=-pthread
+CPPFLAGS=-Wall -std=c++11 -ggdb -I../third-party/googletest/include
+LDFLAGS=-pthread -L../third-party/googletest/build -lgtest_main -lgtest
 
 TestThreadSafeStack:TestThreadSafeStack.o
 	$(CC) $(LDFLAGS) -o $@ $^
