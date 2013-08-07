@@ -7,14 +7,13 @@
 #include <iostream>
 #include <vector>
 
-template<typename T>
 struct HeapNode {
-    T data;
+    int data;
     size_t array_index;
     size_t current_pos;
     size_t next_pos;
-    bool HeapNodeCompare(HeapNode<T>& other) const {
-        return data < other.data;
+    bool operator<(const HeapNode& other) const {
+        return data > other.data;
     }
 };
 
@@ -24,10 +23,10 @@ std::vector<int> MergeKSortedArray(const std::vector<std::vector<int> > arr)
 
     std::vector<int> sorted_array;
     size_t num_of_arrays = arr.size();
-    std::vector<HeapNode<int> > aux_heap(num_of_arrays);
+    std::vector<HeapNode> aux_heap;
 
     for (int i = 0; i < num_of_arrays; i++) {
-        HeapNode<int> node = {arr[i][0], i, 0, 1};
+        HeapNode node = {arr[i][0], i, 0, 1};
         aux_heap.push_back(node);
     }
 
@@ -35,14 +34,14 @@ std::vector<int> MergeKSortedArray(const std::vector<std::vector<int> > arr)
 
     while(true) {
         if (aux_heap.empty()) break;
-        HeapNode<int> node = aux_heap[0];
-        if (node.current_pos < arr[node.array_index].size() - 1) {
+        HeapNode node = aux_heap[0];
+        if (node.current_pos < arr[node.array_index].size()) {
             sorted_array.push_back(node.data);
 
             // the last element in this array.
             if(node.next_pos == arr[node.array_index].size()) {
                 std::pop_heap(aux_heap.begin(), aux_heap.end());
-                aux_heap.erase(aux_heap.begin() + aux_heap.size() - 1);
+                aux_heap.pop_back();
                 aux_heap.shrink_to_fit();
             } else {
                 aux_heap[0].data = arr[node.array_index][node.next_pos];
@@ -65,7 +64,12 @@ std::vector<int> MergeKSortedArray(const std::vector<std::vector<int> > arr)
  */
 int main(int argc, const char *argv[])
 {
-    std::vector<std::vector<int> > arr = {{1, 2, 3}, {3, 4, 5, 6, 8}, {2, 4, 6, 8}};
+    std::vector<std::vector<int> > arr = {
+        {1, 3, 6, 8, 9},
+        {2, 3, 4, 5, 6, 8, 10},
+        {2, 4, 5, 6, 7, 8, 11, 13, 15, 18},
+        {5, 23, 34, 56, 65, 66}
+    };
     std::vector<int> sorted = MergeKSortedArray(arr);
     for_each(sorted.begin(), sorted.end(),
             [] (int i) {std::cout << i << "\t";});
