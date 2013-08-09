@@ -23,6 +23,20 @@
 int Partition(int arr[], int low, int high)
 {
     int x = arr[high];
+    int i = low - 1;
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j] <= x) {
+            i++;
+            std::swap(arr[i + 1], arr[j]);
+        }
+    }
+    std::swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+int Partition2(int arr[], int low, int high)
+{
+    int x = arr[high];
     int i = low;
     for (int j = low; j <= high - 1; j++) {
         if (arr[j] <= x) {
