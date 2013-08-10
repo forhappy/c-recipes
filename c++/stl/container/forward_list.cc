@@ -96,5 +96,11 @@ int main(int argc, const char *argv[])
     fl7.splice_after(fl7.before_begin(), fl3, fl3.begin(), fl3.end());
     fl7.splice_after(fl7.before_begin(), fl3);
 
+    fl7.remove(12);
+    fl7.unique();
+    fl7.sort();
+    fl7.reverse();
+    fl7.merge(fl6);
+
     return EXIT_SUCCESS;
 }  /* ----------  end of function main  ---------- */
