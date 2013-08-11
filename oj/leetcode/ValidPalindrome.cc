@@ -1,10 +1,10 @@
 class Solution {
 public:
     bool isPalindrome(string s) {
-        
+
         if (s.empty()) return true;
         if (s.length() == 1) return true;
-        
+
         std::string aux;
         for (int i = 0; i < s.length(); i++) {
             if ((20 <= s[i] && s[i] <= 47) // ascii from SPACE to '/'
@@ -14,7 +14,7 @@ public:
             continue;
             else aux.append(1, s[i]);
         }
-            
+
         int front = 0, back = aux.length() - 1;
         while (front < back) {
             if (tolower(aux[front]) != tolower(aux[back])) return false;
