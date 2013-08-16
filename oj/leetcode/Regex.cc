@@ -1,3 +1,4 @@
+// http://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html
 /* match: search for regexp anywhere in text */
 int match(char *regexp, char *text)
 {
