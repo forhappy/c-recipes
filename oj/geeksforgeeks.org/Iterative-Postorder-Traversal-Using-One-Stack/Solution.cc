@@ -97,11 +97,11 @@ void postOrderIterative(struct Node* root)
                 push(stack, root->right);
             push(stack, root);
 
-            // Set root as root's left child  
+            // Set root as root's left child
             root = root->left;
         }
 
-        // Pop an item from stack and set it as root    
+        // Pop an item from stack and set it as root
         root = pop(stack);
 
         // If the popped item has a right child and the right child is not
@@ -110,7 +110,7 @@ void postOrderIterative(struct Node* root)
         {
             pop(stack);  // remove right child from stack
             push(stack, root);  // push root back to stack
-            root = root->right; // change root so that the right 
+            root = root->right; // change root so that the right
                                 // child is processed next
         }
         else  // Else print root's data and set root as NULL
