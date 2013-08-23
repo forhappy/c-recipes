@@ -70,3 +70,31 @@ public:
         return results;
     }
 };
+
+class Solution {
+public:
+    void pathSum(TreeNode *root, int sum, vector<int>v, vector<vector<int> >&vs)
+    {
+        if(root==NULL)
+           return ;
+        v.push_back(root->val);
+        if(root->left==NULL && root->right==NULL)
+        {
+           if(root->val == sum)
+               vs.push_back(v);
+           else
+              return ;        
+        }
+        pathSum(root->left, sum-root->val, v, vs);
+        pathSum(root->right, sum-root->val, v, vs);
+    }
+    vector<vector<int> > pathSum(TreeNode *root, int sum) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        vector<vector<int> >vs;
+        vector<int> v;
+        pathSum(root, sum, v, vs);
+        return vs;
+              
+    }
+};
