@@ -34,6 +34,16 @@ int Rand7()
     return x % 7;
 }
 
+int RandomX(int size) {
+    while(1) {
+        int m = rand() % size;
+        int n = rand() % size;
+        if (m + n < size) {
+            return n + m;
+        }
+    }
+}
+
 /*
  * ===  FUNCTION  =========================================================
  *         Name:  main
@@ -48,8 +58,8 @@ int main(int argc, const char *argv[])
 //        std::cout << Rand3() << std::endl;
 //    }
 
-    for (int i = 0; i < 100; i++) {
-        std::cout << Rand7() << std::endl;
+    for (int i = 0; i < 10000; i++) {
+        std::cout << RandomX(10) << std::endl;
     }
 
     return EXIT_SUCCESS;
