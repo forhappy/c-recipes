@@ -27,14 +27,14 @@ int EditDistance(const std::string& source, const std::string& target) {
     if (target.length() == 0) return source.length();
 
     std::vector<std::vector<int> > aux_table(source.length() + 1,
-            std::vector<int>(target.length() + 1, 0));
+            std::vector<int>(target.length() + 1, -1));
 
-    for (size_t i = 1; i <= source.length(); i++) aux_table[i][0] = i;
-    for (size_t i = 1; i <= target.length(); i++) aux_table[0][i] = i;
+    for (size_t i = 0; i <= source.length(); i++) aux_table[i][0] = i;
+    for (size_t i = 0; i <= target.length(); i++) aux_table[0][i] = i;
 
     for (size_t i = 1; i <= source.length(); i++) {
         for (size_t j = 1; j <= target.length(); j++) {
-            if (source[i] == target[j]) aux_table[i][j] = aux_table[i - 1][j - 1];
+            if (source[i - 1] == target[j - 1]) aux_table[i][j] = aux_table[i - 1][j - 1];
             else {
                 aux_table[i][j] = min3(aux_table[i - 1][j] + kDeletionCost,
                         aux_table[i][j - 1] + kInsertionCost,
@@ -43,7 +43,7 @@ int EditDistance(const std::string& source, const std::string& target) {
         }
     }
 
-    return aux_table[source.length() - 1][target.length() - 1];
+    return aux_table[source.length()][target.length()];
 }
 
 
@@ -57,8 +57,8 @@ int EditDistance(const std::string& source, const std::string& target) {
 int main(int argc, const char *argv[])
 {
 
-    std::string source = "xxxhello";
-    std::string target = "hellox";
+    std::string source = "xhelloxxy";
+    std::string target = "yhelloyxy";
     std::cout << EditDistance(source, target) << std::endl;
     return EXIT_SUCCESS;
 }  /* ----------  end of function main  ---------- */
