@@ -19,3 +19,75 @@ ForwardIterator upper_bound( ForwardIterator first, ForwardIterator last, const 
     }
     return first;
 }
+
+template <class ForwardIterator, class T>
+ForwardIterator my_upper_bound(ForwardIterator first, ForwardIterator last,
+                           const T& val)
+{
+    ForwardIterator middle;
+    typename std::iterator_traits<ForwardIterator>::difference_type len, half;
+    len = std::distance(first, last);
+
+    while (len > 0) {
+        half = len >> 1;
+        middle = first;
+        std::advance(middle, half);
+        if (val < *middle)
+            len = half;
+        else {
+            first = middle;
+            ++first;
+            len = len - half - 1;
+        }
+    }
+
+  return first;
+}
+
+template <class ForwardIterator, class T>
+ForwardIterator my_lower_bound(ForwardIterator first,
+                               ForwardIterator last,
+                               const T& val)
+{
+    ForwardIterator middle;
+    typename std::iterator_traits
+        <ForwardIterator>::difference_type len, half;
+    len = std::distance(first, last);
+
+    while (len > 0) {
+        half = len >> 1;
+        middle = first;
+        std::advance(middle, half);
+        if (val <= *middle) {
+            len = half;
+        } else {
+            first = middle;
+            ++first;
+            len = len - half - 1;
+        }
+    }
+
+  return first;
+}
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+/*
+ * ===  FUNCTION  =========================================================
+ *         Name:  main
+ *  Description:  program entry routine.
+ * ========================================================================
+ */
+int main(int argc, const char *argv[])
+{
+    int a[] = {1, 2, 3, 4, 5, 5, 5, 5, 5, 6, 7, 8, 9, 10};
+    size_t alen = sizeof(a) / sizeof(a[0]);
+    printf("%d\n", a[std::lower_bound(a, a + alen, 5) - a]);
+    printf("%d\n", a[my_lower_bound(a, a + alen, 5) - a]);
+    printf("%d\n", a[my_upper_bound(a, a + alen, 5) - a - 1]);
+
+    return EXIT_SUCCESS;
+}  /* ----------  end of function main  ---------- */
+
