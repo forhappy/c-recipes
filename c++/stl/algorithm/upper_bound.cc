@@ -82,10 +82,10 @@ ForwardIterator my_lower_bound(ForwardIterator first,
  */
 int main(int argc, const char *argv[])
 {
-    int a[] = {1, 2, 3, 4, 5, 5, 5, 5, 5, 6, 7, 8, 9, 10};
+    int a[] = {1, 2, 3, 4, 5, 5, 5, 5, 5, 6, 7, 8, 9, 10, 13};
     size_t alen = sizeof(a) / sizeof(a[0]);
-    printf("%d\n", a[std::lower_bound(a, a + alen, 5) - a]);
-    printf("%d\n", a[my_lower_bound(a, a + alen, 5) - a]);
+    printf("%d\n", a[std::lower_bound(a, a + alen, 11) - a]);
+    printf("%d\n", a[my_lower_bound(a, a + alen, 11) - a]);
     printf("%d\n", a[my_upper_bound(a, a + alen, 5) - a - 1]);
 
     return EXIT_SUCCESS;
